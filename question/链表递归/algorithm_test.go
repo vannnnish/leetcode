@@ -28,5 +28,5 @@ func TestMethod(t *testing.T) {
 			},
 		},
 	}
-	fmt.Println(Method(l1,1))
+	fmt.Println(Method(l1,3))
 }
