@@ -20,10 +20,9 @@ pkg/
 *.toml
 logs
 *.json
-cert
 
-niuyan_localization/
 
-niuyan_app*
 
 go.sum
+
+*_repeat.go
