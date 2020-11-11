@@ -23,36 +23,36 @@ func NewCycleQueue(k int) *CycleQueue {
 	}
 }
 
-func (this *CycleQueue) EnCycleQueue(value int) bool {
-	if this.container == nil || this.IsFull() {
+func (cq *CycleQueue) EnCycleQueue(value int) bool {
+	if cq.container == nil || cq.IsFull() {
 		return false
 	}
-	this.container[this.rear%len(this.container)] = value
-	this.rear = this.rear%len(this.container) + 1
-	this.size++
+	cq.container[cq.rear%len(cq.container)] = value
+	cq.rear = cq.rear%len(cq.container) + 1
+	cq.size++
 	return true
 }
 
-func (this *CycleQueue) DeCycleQueue() (bool, int) {
-	if this.container == nil || this.IsEmpty() {
+func (cq *CycleQueue) DeCycleQueue() (bool, int) {
+	if cq.container == nil || cq.IsEmpty() {
 		return false, 0
 	} else {
-		ret := this.container[this.front%len(this.container)]
-		this.front = this.front%len(this.container) + 1
-		this.size--
+		ret := cq.container[cq.front%len(cq.container)]
+		cq.front = cq.front%len(cq.container) + 1
+		cq.size--
 		return true, ret
 	}
 }
 
-func (this *CycleQueue) IsEmpty() bool {
-	if this.size == 0 {
+func (cq *CycleQueue) IsEmpty() bool {
+	if cq.size == 0 {
 		return true
 	}
 	return false
 }
 
-func (this *CycleQueue) IsFull() bool {
-	if this.size == len(this.container) {
+func (cq *CycleQueue) IsFull() bool {
+	if cq.size == len(cq.container) {
 		return true
 	}
 	return false
