@@ -86,3 +86,23 @@ func OutputNode(node *Node) {
 		fmt.Printf("%d ", nodeList[i].E)
 	}
 }
+
+// 树的非递归遍历
+func (t *Tree) PreOrderNR() {
+	stack := make([]*Node, 0)
+	stack = append(stack, t.root)
+	for len(stack) > 0 {
+		// 获取到当前的节点
+		curNode := stack[len(stack)-1]
+		// 将这个节点出栈, 此时
+		stack = stack[:len(stack)-1]
+		fmt.Printf("%d ", curNode.E)
+		if curNode.Right != nil {
+			stack = append(stack, curNode.Right)
+		}
+		if curNode.Left != nil {
+			stack = append(stack, curNode.Left)
+		}
+	}
+	fmt.Println()
+}
