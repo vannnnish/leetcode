@@ -120,81 +120,81 @@ func (t *Tree) push(node *Node, k, v int) *Node {
 	return node
 }
 
-func (this *Tree) getNode(node *Node, k int) *Node {
+func (t *Tree) getNode(node *Node, k int) *Node {
 	if node == nil {
 		return nil
 	}
 	if k == node.k {
 		return node
 	} else if k < node.k {
-		return this.getNode(node.left, k)
+		return t.getNode(node.left, k)
 	} else {
-		return this.getNode(node.right, k)
+		return t.getNode(node.right, k)
 	}
 }
-func (this *Tree) Contains(key int) bool {
-	return this.getNode(this.root, key) != nil
+func (t *Tree) Contains(key int) bool {
+	return t.getNode(t.root, key) != nil
 }
 
-func (this *Tree) GetValue(key int) *int {
-	node := this.getNode(this.root, key)
+func (t *Tree) GetValue(key int) *int {
+	node := t.getNode(t.root, key)
 	if node == nil {
 		return nil
 	} else {
 		return &node.v
 	}
 }
-func (this *Tree) SetNewValue(key, value int) {
-	node := this.getNode(this.root, key)
+func (t *Tree) SetNewValue(key, value int) {
+	node := t.getNode(t.root, key)
 	if node == nil {
 		panic("没有这个key值")
 	}
 	node.v = value
 }
 
-func (this *Tree) minimum(node *Node) *Node {
+func (t *Tree) minimum(node *Node) *Node {
 	if node.left == nil {
 		return node
 	}
-	return this.minimum(node.left)
+	return t.minimum(node.left)
 }
 
-func (this *Tree) removeMin(node *Node) *Node {
+func (t *Tree) removeMin(node *Node) *Node {
 	if node.left == nil {
 		rightNode := node.right
 		node.right = nil
-		this.size--
+		t.size--
 		return rightNode
 	}
-	node.left = this.removeMin(node.left)
+	node.left = t.removeMin(node.left)
 	return node
 }
 
-func (this *Tree) Remove(node *Node, key int) *Node {
+func (t *Tree) Remove(node *Node, key int) *Node {
 	if node == nil {
 		return node
 	}
 	if key < node.k {
-		node.left = this.Remove(node.left, key)
+		node.left = t.Remove(node.left, key)
 		return node
 	} else if key > node.k {
-		node.right = this.Remove(node.right, key)
+		node.right = t.Remove(node.right, key)
 		return node.right
 	} else {
 		if node.left == nil {
 			rightNode := node.right
 			node.right = nil
-			this.size--
+			t.size--
 			return rightNode
 		}
 		if node.right == nil {
 			leftNode := node.left
 			node.left = nil
-			this.size--
+			t.size--
 			return leftNode
 		}
-		successor := this.minimum(node.right)
-		successor.right = this.removeMin(node.right)
+		successor := t.minimum(node.right)
+		successor.right = t.removeMin(node.right)
 		successor.left = node.left
 		return successor
 	}
