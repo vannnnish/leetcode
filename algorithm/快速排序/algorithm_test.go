@@ -17,9 +17,9 @@ func TestMethod(t *testing.T) {
 		args args
 	}{
 		{name: "xixi", args: args{
-			array: []int{1, 2, 4, 65, 7, 8, 9, 23},
+			array: []int{4, 2, 5, 1, 7, 9},
 			begin: 0,
-			end:   2,
+			end:   5,
 			mark:  "--",
 		}},
 	}
@@ -30,4 +30,10 @@ func TestMethod(t *testing.T) {
 			fmt.Println(tt.args.array)
 		})
 	}
+}
+
+func TestQuickSort(t *testing.T) {
+	var array = []int{4, 2, 5, 1, 7, 9}
+	quickSort(array, 0, len(array)-1)
+	fmt.Println(array)
 }

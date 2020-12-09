@@ -18,7 +18,6 @@ func Method(array []int, begin, end int, mark string) {
 			} else {
 				i = i + 1
 			}
-
 		}
 
 		/* 跳出while循环后，i = j。
@@ -36,4 +35,36 @@ func Method(array []int, begin, end int, mark string) {
 		Method(array, begin, i, mark+"--")
 		Method(array, j, end, mark+"--")
 	}
+}
+
+func quickSort(arr []int, start, end int) {
+	var i, j int
+	if start < end {
+		i = start + 1
+		j = end
+		for {
+			if i >= j {
+				break
+			}
+			if arr[i] > arr[start] {
+				arr[i], arr[j] = arr[j], arr[i]
+				j--
+			} else {
+				i++
+			}
+		}
+		if arr[i] >= arr[start] {
+			i--
+		}
+		arr[i], arr[start] = arr[start], arr[i]
+		quickSort(arr, start, i)
+		quickSort(arr, j, end)
+	}
+
+}
+
+
+
+func _quickSort(){
+
 }
