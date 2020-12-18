@@ -4,11 +4,12 @@
 @File : algorithm_test
 */
 
-package 寻宝
+package 字符串转整数
 
 import (
 	"testing"
 )
 
 func TestMethod(t *testing.T) {
+
 }
