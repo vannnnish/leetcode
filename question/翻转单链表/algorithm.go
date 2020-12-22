@@ -4,11 +4,12 @@
 @File : algorithm
 */
 
-package 旋转链表
+package 翻转单链表
 
 import (
 	"fmt"
 )
+
 
 type ListNode struct {
 	Val  int
@@ -23,12 +24,12 @@ func rotateRight(head *ListNode, k int) *ListNode {
 	for ; head != nil; head = head.Next {
 		length++
 	}
-	if length == 0 {
-		return head
+	if length <= 1 {
+		return originStart
 	}
 	mod := k % length
 	if mod == 0 {
-		return head
+		return originStart
 	}
 	//var cutListNode *ListNode
 	// 找到截断点
@@ -47,8 +48,5 @@ func rotateRight(head *ListNode, k int) *ListNode {
 	for ; cut.Next != nil; cut = cut.Next {
 	}
 	cut.Next = originStart
-	for ; originCut != nil; originCut = originCut.Next {
-		fmt.Println("vi:", originCut.Val)
-	}
 	return originCut
 }

@@ -4,7 +4,7 @@
 @File : algorithm_test
 */
 
-package 旋转链表
+package 翻转单链表
 
 import "testing"
 
@@ -17,5 +17,5 @@ func TestRotate(t *testing.T) {
 				Next: nil,
 			},
 		},
-	},2)
+	},1)
 }
