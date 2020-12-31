@@ -29,7 +29,7 @@ func TestMethod(t *testing.T) {
 		},
 	}
 
-	res:=Method(list,2)
+	res:= Method(list,2)
 	fmt.Println("res:",res)
 	if res!=nil{
 		for ; res != nil; {
