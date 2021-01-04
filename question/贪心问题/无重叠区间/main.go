@@ -1,7 +1,6 @@
 package 无重叠区间
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -15,8 +14,10 @@ func eraseOverlapIntervals(intervals [][]int) int {
 	if length == 0 {
 		return 0
 	}
-	sort.Sort(SortSlice(intervals))
-	fmt.Println(intervals)
+	//sort.Sort(SortSlice(intervals))
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][1] < intervals[j][1]
+	})
 	// 移除的标记
 	compareElement := intervals[0]
 	// 进行重叠区间选择
