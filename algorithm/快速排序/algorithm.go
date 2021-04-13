@@ -63,8 +63,57 @@ func quickSort(arr []int, start, end int) {
 
 }
 
+func quickSort1(arr []int, start, end int) {
+	if start < end {
+		i, j := start, end
+		key := arr[(start+end)/2]
+		for i <= j {
+			for arr[i] < key {
+				i++
+			}
+			for arr[j] > key {
+				j--
+			}
+			if i <= j {
+				arr[i], arr[j] = arr[j], arr[i]
+				i++
+				j--
+			}
+		}
 
+		if start < j {
+			quickSort(arr, start, j)
+		}
+		if end > i {
+			quickSort(arr, i, end)
+		}
+	}
+}
 
-func _quickSort(){
-
+func quickSort2(arr []int, start, end int) {
+	for start < end {
+		i, j := start, end
+		key := arr[(start+end)/2]
+		for i <= j {
+			// 从左边开始判断，
+			for arr[i] < key {
+				i++
+			}
+			// 指导找到一个比key大的， 然后开始从又右边开始
+			for arr[j] > key {
+				j++
+			}
+			if i <= j {
+				arr[i], arr[j] = arr[j], arr[i]
+				i++
+				j--
+			}
+		}
+		if start < j {
+			quickSort2(arr, start, j)
+		}
+		if end > i {
+			quickSort2(arr, i, end)
+		}
+	}
 }

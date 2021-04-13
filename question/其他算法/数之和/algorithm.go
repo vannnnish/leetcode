@@ -4,7 +4,7 @@
 @File : algorithm
 */
 
-package 将数之和
+package 数之和
 
 func Method(target int, nums []int) []int {
 	if !isValid(nums) {
