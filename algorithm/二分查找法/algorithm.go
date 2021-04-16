@@ -13,11 +13,11 @@ func BinarySearch(arr []int, target int) int {
 		mid = (left + right) / 2
 		// 要查找的元素在左边
 		if arr[mid] > target {
-			right = mid-1
+			right = mid - 1
 			continue
 		}
 		if arr[mid] < target {
-			left = mid+1
+			left = mid + 1
 			continue
 		}
 		if arr[mid] == target {
@@ -49,4 +49,26 @@ func BinaryFind(arr []int, k int) int {
 	}
 	// 输入元素的下标
 	return mid
+}
+
+func BinarySearch2(arr []int, target int) int {
+	left, right, mid := 0, len(arr)-1, (len(arr)-1)/2
+	for right >= left {
+		if target == arr[mid] {
+			return mid
+		}
+		// 元素在右边
+		if target > arr[mid] {
+			left = mid+1
+			mid = left+(right -left) / 2
+			continue
+		}
+		// 元素在左边
+		if target < arr[mid] {
+			right = mid-1
+			mid = left+(right -left) / 2
+			continue
+		}
+	}
+	return -1
 }
