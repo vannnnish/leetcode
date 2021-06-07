@@ -1,39 +1,47 @@
 package 归并排序
 
-func MergeSort(arr []int, start, end int) {
-	if start >= end {
-		return
+func mergeSortFromOnline(arr []int ){
+	 mergeSort(arr)
+}
+func mergeSort(arr []int) []int {
+	length := len(arr)
+	if length < 2 {
+		return arr
 	}
-	mid := (start + end) / 2
-	// 分组
-	MergeSort(arr, start, mid)
-	MergeSort(arr, mid+1, end)
-	// 合并
-	merge(arr, start, mid, end)
+	middle := length / 2
+	left := arr[0:middle]
+	right := arr[middle:]
+	return merge(mergeSort(left), mergeSort(right))
 }
 
-func merge(arr []int, start, mid, end int) {
-	tmparr := make([]int, 0)
-	var s1, s2 = start, mid + 1
-	for s1 <= mid && s2 <= end {
-		if arr[s1] > arr[s2] {
-			tmparr = append(tmparr, arr[s2])
-			s2++
+func merge(left []int, right []int) []int {
+	var result []int
+	for len(left) != 0 && len(right) != 0 {
+		if left[0] <= right[0] {
+			result = append(result, left[0])
+			left = left[1:]
 		} else {
-			tmparr = append(tmparr, arr[s1])
-			s1++
+			result = append(result, right[0])
+			right = right[1:]
 		}
 	}
 
-	if s1 <= mid {
-		tmparr = append(tmparr, arr[s1:mid+1]...)
-	}
-	if s2 <= end {
-		tmparr = append(tmparr, arr[s2:end+1]...)
+	for len(left) != 0 {
+		result = append(result, left[0])
+		left = left[1:]
 	}
 
-	for pos, item := range tmparr {
-		arr[start+pos] = item
+	for len(right) != 0 {
+		result = append(result, right[0])
+		right = right[1:]
 	}
 
+	return result
+}
+
+// 归并排序
+func mergeSortByMyself(arr []int) {
+	/*	length := len(arr)
+		emptyArr := make([]int, length)
+		for i:=0*/
 }

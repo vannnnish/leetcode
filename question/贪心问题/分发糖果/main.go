@@ -1,5 +1,6 @@
 package 分发糖果
 
+// 已通过测试  https://leetcode-cn.com/problems/candy/
 func candy(ratings []int) int {
 	var res = make([]int, len(ratings))
 	lenOfRatings := len(ratings)
@@ -13,8 +14,8 @@ func candy(ratings []int) int {
 	}
 
 	for i := lenOfRatings - 1; i > 0; i-- {
-		if ratings[i-1] > ratings[i]{
-			res[i-1] = max(res[i] + 1,res[i-1])
+		if ratings[i-1] > ratings[i] {
+			res[i-1] = max(res[i]+1, res[i-1])
 		}
 	}
 	var total int

@@ -90,30 +90,114 @@ func quickSort1(arr []int, start, end int) {
 	}
 }
 
-func quickSort2(arr []int, start, end int) {
-	for start < end {
-		i, j := start, end
+func quickSort3(arr []int) {
+	sort(arr, 0, len(arr)-1)
+}
+
+// start 表示起始小标， end 表示结尾下标
+// 以起始点为标记点进行排序
+func sort(arr []int, start, end int) {
+	var left, right int
+	if start < end {
+		left, right = start+1, end
+		for {
+			if left >= right {
+				break
+			}
+			// 从小到大排序
+			if arr[left] > arr[start] {
+				arr[left], arr[right] = arr[right], arr[left]
+				right = right - 1
+			} else {
+				left = left + 1
+			}
+		}
+		if arr[left] >= arr[start] { // 这里必须要取等“>=”，否则数组元素由相同的值时，会出现错误！
+			left = left - 1
+		}
+
+		arr[start], arr[left] = arr[left], arr[start]
+
+		sort(arr, start, left)
+		sort(arr, right, end)
+	}
+}
+
+func quickSort4(arr []int) {
+	sortByMiddle(arr, 0, len(arr)-1)
+}
+
+// 以中间点为标记进行
+// start 表示起始小标， end 表示结尾下标
+// 以起始点为标记点进行排序
+func sortByMiddle(arr []int, start, end int) {
+	var left, right int
+	if start < end {
+		left, right = start+1, end
 		key := arr[(start+end)/2]
-		for i <= j {
-			// 从左边开始判断，
-			for arr[i] < key {
+		arr[start], arr[(start+end)/2] = arr[(start+end)/2], arr[start]
+		for {
+			if left >= right {
+				break
+			}
+			// 从小到大排序
+			if arr[left] > key {
+				arr[left], arr[right] = arr[right], arr[left]
+				right--
+			} else {
+				left++
+			}
+		}
+		if arr[left] >= key {
+			left--
+		}
+		arr[left], arr[start] = arr[start], arr[left]
+		sortByMiddle(arr, start, left)
+		sortByMiddle(arr, right, end)
+	}
+}
+
+func quickSort5(arr []int) {
+	threeWaysSort(arr, 0, len(arr)-1)
+}
+
+// 以中间点为标记进行
+// start 表示起始小标， end 表示结尾下标
+// 三路快排
+func threeWaysSort(arr []int, start, end int) {
+	// i: 当前处理的元素
+	// lv: 小于被处理元素的下标
+	// gv: 大于标处理元素的下标
+	var i, lv, gv int
+	if start < end {
+		i, lv, gv = start+1, start+1, end
+		key := arr[(start+end)/2]
+		arr[start], arr[(start+end)/2] = arr[(start+end)/2], arr[start]
+		for {
+			if i >= gv {
+				if arr[i] < key {
+					arr[i], arr[lv] = arr[lv], arr[i]
+				}
+				break
+			}
+			// 从小到大排序
+			// 如果该元素比被比较的元素小，那么放到左边
+			if arr[i] > key {
+				arr[i], arr[gv] = arr[gv], arr[i]
+				gv--
+			} else if arr[i] < key {
+				arr[i], arr[lv] = arr[lv], arr[i]
+				i++
+				lv++
+			} else {
 				i++
 			}
-			// 指导找到一个比key大的， 然后开始从又右边开始
-			for arr[j] > key {
-				j++
-			}
-			if i <= j {
-				arr[i], arr[j] = arr[j], arr[i]
-				i++
-				j--
-			}
 		}
-		if start < j {
-			quickSort2(arr, start, j)
+		if arr[lv] == key {
+			lv--
 		}
-		if end > i {
-			quickSort2(arr, i, end)
-		}
+		arr[lv], arr[start] = arr[start], arr[lv]
+		threeWaysSort(arr, start, lv-1)
+		threeWaysSort(arr, gv, end)
 	}
 }
