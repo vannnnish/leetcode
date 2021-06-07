@@ -65,3 +65,20 @@ func TestQuickSort5(t *testing.T) {
 	common.DoTimeStatic(array, quickSort5)
 	fmt.Println(common.IsValidSort(array))
 }
+
+// 测试 append
+/* 结论， 当slice 发生扩容是，在函数传递中若想要获取这个扩容后的结果，
+那就只能是返回这个值。 无法使用指针的方式。
+*/
+func TestAppend(t *testing.T) {
+	arr := []int{12, 34}
+	appendArray(&arr)
+	fmt.Println("外面:", arr)
+}
+
+func appendArray(arr *[]int) {
+	fmt.Println(arr)
+	a := append(*arr, 1, 2, 3)
+	fmt.Println(a)
+	fmt.Println(arr)
+}
